@@ -111,7 +111,7 @@ abstract class Base extends \Prefab
     }
 
     public function beforeroute(): void
-    {
+    {/*
         $this->access->authorize($this->getRole(), function($route, $subject): void {
             $this->onAccessAuthorizeDeny($route, $subject);
         });
@@ -125,7 +125,7 @@ abstract class Base extends \Prefab
             $uri = $this->f3->get('PATH');
             $uri = preg_replace('/\/' . $this->f3->get('PARAMS.page') . '$/', '/1', $uri);
             $this->f3->reroute($uri);
-        }
+        }*/
     }
 
     public function onAccessAuthorizeDeny($route, $subject): void

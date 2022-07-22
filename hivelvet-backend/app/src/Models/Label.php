@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -34,18 +35,18 @@ use Models\Base as BaseModel;
  */
 
 
- Class Label extends BaseModel
- {
+class Label extends BaseModel
+{
 
     protected $table = 'labels';
 
     public function __construct($db = null, $table = null, $fluid = null, $ttl = 0)
     {
         parent::__construct($db, $table, $fluid, $ttl);
-              $this->onset('name', fn($self, $value) => $self->f3->snakecase($value));
+        $this->onset('name', fn ($self, $value) => $self->f3->snakecase($value));
     }
 
-     /**
+    /**
      * Get label record by id value.
      *
      * @return $this
@@ -61,31 +62,30 @@ use Models\Base as BaseModel;
      *check if name is already in use .
      * @param string $name 
      * retu
-     */ 
+     */
     public function nameExists($name)
     {
-        return $this->load(['name = ?' , $this->f3->snakecase($name)]); 
-    } 
+        return $this->load(['name = ?', $this->f3->snakecase($name)]);
+    }
 
-    public function getAllLabels() 
+    public function getAllLabels()
     {
         $data = [];
-        $labels = $this->find([], ['order' => 'id']); 
-        if($labels) { 
-            foreach($labels as $label)
+        $labels = $this->find([], ['order' => 'id']);
+        if ($labels) {
+            foreach ($labels as $label)
                 $data[] = $label->getLabelInfos();
         }
-        return $data ;
+        return $data;
     }
 
     public function getLabelInfos(): array
     {
         return [
-            'key'           =>$this->id,
-            'name'          =>$this->name, 
-            'description'   =>$this->description,
-            'color'         =>$this->color
+            'key'           => $this->id,
+            'name'          => $this->name,
+            'description'   => $this->description,
+            'color'         => $this->color
         ];
-
     }
- }
+}
